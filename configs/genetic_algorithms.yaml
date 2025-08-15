@@ -1,0 +1,58 @@
+name: "Genetic Algorithm Research Analysis"
+description: "Extract genetic algorithm parameters, fitness functions, constraints, and experimental methodology from research papers"
+
+prompt: |
+  Extract genetic algorithm parameters, fitness functions, constraints, parameters, and experimental methodology.
+  Use exact text for extractions. Focus on technical details and specifications.
+  Identify quantitative values, algorithm components, and experimental setup details.
+
+examples:
+  - text: "We used a genetic algorithm with tournament selection to optimize the multi-objective fitness function f(x) = w1*accuracy + w2*complexity. The input parameter space consisted of 50 decision variables bounded between [0,1]. Population size was set to 100 with crossover probability 0.8 and mutation rate 0.02."
+    extractions:
+      - class: "algorithm"
+        text: "genetic algorithm with tournament selection"
+        attributes:
+          type: "optimization"
+          selection_method: "tournament"
+      - class: "fitness_function"
+        text: "f(x) = w1*accuracy + w2*complexity"
+        attributes:
+          type: "multi-objective"
+          components: "accuracy, complexity"
+          formula: "f(x) = w1*accuracy + w2*complexity"
+      - class: "parameters"
+        text: "50 decision variables bounded between [0,1]"
+        attributes:
+          dimension: "50"
+          bounds: "[0,1]"
+          type: "decision_variables"
+      - class: "constraints"
+        text: "Population size was set to 100 with crossover probability 0.8 and mutation rate 0.02"
+        attributes:
+          population_size: "100"
+          crossover_probability: "0.8"
+          mutation_rate: "0.02"
+
+  - text: "The evolutionary algorithm employed real-coded chromosomes with uniform crossover and Gaussian mutation. Performance was evaluated using time-to-collision (TTC) as the primary fitness metric, with constraints ensuring vehicle safety parameters remained within acceptable bounds."
+    extractions:
+      - class: "algorithm"
+        text: "evolutionary algorithm employed real-coded chromosomes"
+        attributes:
+          encoding: "real-coded"
+          chromosome_type: "real-coded"
+      - class: "genetic_operators"
+        text: "uniform crossover and Gaussian mutation"
+        attributes:
+          crossover_type: "uniform"
+          mutation_type: "Gaussian"
+      - class: "fitness_function"
+        text: "time-to-collision (TTC) as the primary fitness metric"
+        attributes:
+          metric: "time-to-collision"
+          abbreviation: "TTC"
+          role: "primary"
+
+extraction_settings:
+  extraction_passes: 2
+  max_workers: 5
+  max_char_buffer: 2000

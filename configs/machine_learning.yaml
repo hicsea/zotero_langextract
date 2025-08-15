@@ -1,0 +1,64 @@
+name: "Machine Learning Methods Analysis"
+description: "Extract machine learning algorithms, datasets, performance metrics, and experimental results"
+
+prompt: |
+  Extract machine learning methods, datasets, performance metrics, training procedures, and experimental results.
+  Focus on model architectures, hyperparameters, evaluation metrics, and comparative results.
+  Identify quantitative performance measures and experimental setup details.
+
+examples:
+  - text: "We trained a convolutional neural network with 3 hidden layers on the MNIST dataset achieving 98.5% accuracy. The model used ReLU activation functions, dropout rate of 0.3, and was trained for 100 epochs with batch size 32 using Adam optimizer with learning rate 0.001."
+    extractions:
+      - class: "model_architecture"
+        text: "convolutional neural network with 3 hidden layers"
+        attributes:
+          model_type: "CNN"
+          layers: "3"
+          architecture: "convolutional"
+      - class: "dataset"
+        text: "MNIST dataset"
+        attributes:
+          name: "MNIST"
+          type: "image_classification"
+      - class: "performance"
+        text: "achieving 98.5% accuracy"
+        attributes:
+          metric: "accuracy"
+          value: "98.5%"
+      - class: "hyperparameters"
+        text: "dropout rate of 0.3, trained for 100 epochs with batch size 32, learning rate 0.001"
+        attributes:
+          dropout_rate: "0.3"
+          epochs: "100"
+          batch_size: "32"
+          learning_rate: "0.001"
+          optimizer: "Adam"
+
+  - text: "The support vector machine with RBF kernel (C=1.0, γ=0.01) was compared against random forest (100 trees) on cross-validation achieving F1-scores of 0.87 and 0.82 respectively."
+    extractions:
+      - class: "algorithm"
+        text: "support vector machine with RBF kernel"
+        attributes:
+          algorithm: "SVM"
+          kernel: "RBF"
+      - class: "hyperparameters"
+        text: "C=1.0, γ=0.01"
+        attributes:
+          C: "1.0"
+          gamma: "0.01"
+      - class: "comparison"
+        text: "random forest (100 trees)"
+        attributes:
+          algorithm: "Random Forest"
+          n_estimators: "100"
+      - class: "performance"
+        text: "F1-scores of 0.87 and 0.82 respectively"
+        attributes:
+          metric: "F1-score"
+          svm_score: "0.87"
+          rf_score: "0.82"
+
+extraction_settings:
+  extraction_passes: 2
+  max_workers: 4
+  max_char_buffer: 1800
